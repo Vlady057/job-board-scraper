@@ -4,21 +4,25 @@ from src import storage
 
 
 def test_save_jobs(tmp_path, monkeypatch):
+    output_file = tmp_path / "jobs.json"
+
+    monkeypatch.setattr(
+        storage,
+        "OUTPUT_FILE",
+        str(output_file)
+    )
+
     jobs = [
         {
             "title": "Python Developer",
             "company": "Test Company",
-            "location": "Chisinau",
+            "location": "Remote"
         }
     ]
-
-    output_file = tmp_path / "jobs.json"
-
-    monkeypatch.setattr(storage, "OUTPUT_FILE", str(output_file))
 
     storage.save_jobs(jobs)
 
     with open(output_file, "r", encoding="utf-8") as file:
-        saved_jobs = json.load(file)
+        data = json.load(file)
 
-    assert saved_jobs == jobs
+    assert data == jobs

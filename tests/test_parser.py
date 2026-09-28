@@ -1,9 +1,4 @@
-import sys
-from pathlib import Path
-
-sys.path.insert(0, str(Path(__file__).parent.parent / "src"))
-
-from parser import parse_job, filter_jobs
+from src.parser import parse_job, filter_jobs
 
 
 class MockLocator:

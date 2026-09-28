@@ -1,7 +1,7 @@
 from playwright.sync_api import sync_playwright
 
-from parser import parse_job, filter_jobs
-from storage import save_jobs
+from src.parser import parse_job, filter_jobs
+from src.storage import save_jobs
 
 
 URL = "https://realpython.github.io/fake-jobs/"
