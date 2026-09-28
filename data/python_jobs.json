@@ -1,0 +1,52 @@
+[
+    {
+        "title": "Senior Python Developer",
+        "company": "Payne, Roberts and Davis",
+        "location": "Stewartbury, AA"
+    },
+    {
+        "title": "Software Engineer (Python)",
+        "company": "Garcia PLC",
+        "location": "Ericberg, AE"
+    },
+    {
+        "title": "Python Programmer (Entry-Level)",
+        "company": "Moss, Duncan and Allen",
+        "location": "Port Sara, AE"
+    },
+    {
+        "title": "Python Programmer (Entry-Level)",
+        "company": "Cooper and Sons",
+        "location": "West Victor, AE"
+    },
+    {
+        "title": "Software Developer (Python)",
+        "company": "Adams-Brewer",
+        "location": "Brockburgh, AE"
+    },
+    {
+        "title": "Python Developer",
+        "company": "Rivera and Sons",
+        "location": "East Michaelfort, AA"
+    },
+    {
+        "title": "Back-End Web Developer (Python, Django)",
+        "company": "Stewart-Alexander",
+        "location": "South Kimberly, AA"
+    },
+    {
+        "title": "Back-End Web Developer (Python, Django)",
+        "company": "Jackson, Ali and Mckee",
+        "location": "New Elizabethside, AA"
+    },
+    {
+        "title": "Python Programmer (Entry-Level)",
+        "company": "Mathews Inc",
+        "location": "Robertborough, AP"
+    },
+    {
+        "title": "Software Developer (Python)",
+        "company": "Moreno-Rodriguez",
+        "location": "Martinezburgh, AE"
+    }
+]
