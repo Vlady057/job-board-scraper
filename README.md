@@ -1,108 +1,109 @@
-
 # Job Board Scraper
 
-A Python web scraping project that collects job listings from a demo job board using **Playwright**, parses selected fields, filters jobs by keyword, and saves the results to JSON.
+Python web scraper for collecting job listings from the [Real Python Fake Jobs](https://realpython.github.io/fake-jobs/) website.
+
+The project uses **Playwright** for browser automation, separates scraping, parsing, and storage logic, and includes unit tests with **pytest**.
 
 ## Features
 
-* Browser automation with Playwright
-* Extraction of specific job fields:
+* Scrapes job listings using Playwright
+* Extracts:
 
-  * Job title
-  * Company
-  * Location
-* Keyword-based job filtering
-* JSON data storage
-* Separate output for all jobs and filtered jobs
-* Automated tests with pytest
+  * job title
+  * company
+  * location
+* Filters jobs by keyword
+* Saves all jobs to JSON
+* Saves filtered jobs to a separate JSON file
+* Uses a modular project structure
+* Includes unit tests for parsing and storage
+* Uses mock objects to test parsing without launching a browser
+
+## Technologies
+
+* Python 3
+* Playwright
+* pytest
+* JSON
 
 ## Project Structure
 
 ```text
 job-board-scraper/
+│
 ├── src/
 │   ├── __init__.py
 │   ├── scraper.py
 │   ├── parser.py
 │   └── storage.py
 │
-├── data/
-│   ├── jobs.json
-│   └── python_jobs.json
-│
 ├── tests/
 │   ├── test_parser.py
 │   └── test_storage.py
+│
+├── data/
+│   ├── jobs.json
+│   └── python_jobs.json
 │
 ├── .gitignore
 ├── requirements.txt
 └── README.md
 ```
 
-## Technologies
+## Architecture
 
-* Python 3.13
-* Playwright
-* pytest
-* JSON
-
-## How It Works
-
-The scraper opens the job board with Playwright and extracts the required information from each job listing.
+The project follows a simple separation of responsibilities:
 
 ```text
-Job Board
-    ↓
-Playwright
-    ↓
-Extract job data
-    ↓
-Parse title, company and location
-    ↓
-Save all jobs
-    ↓
-Filter by keyword
-    ↓
-Save filtered jobs
+Website
+   │
+   ▼
+scraper.py
+   │
+   │ Playwright
+   ▼
+parser.py
+   │
+   │ parsed job data
+   ▼
+storage.py
+   │
+   ▼
+JSON files
 ```
 
-The project currently collects 100 job listings and filters them by the keyword `python`.
+### `scraper.py`
 
-## Output
+Responsible for browser automation and collecting job cards from the website.
 
-All scraped jobs are saved to:
+### `parser.py`
 
-```text
-data/jobs.json
-```
+Responsible for extracting job information and filtering jobs by keyword.
 
-Python-related jobs are saved separately to:
+### `storage.py`
 
-```text
-data/python_jobs.json
-```
+Responsible for saving and loading job data in JSON format.
 
-Example:
+### `tests/`
 
-```json
-{
-    "title": "Senior Python Developer",
-    "company": "Payne, Roberts and Davis",
-    "location": "Stevens Point, WI"
-}
-```
+Contains unit tests for the parser and storage modules.
 
 ## Installation
 
-Clone the repository and create a virtual environment:
+Clone the repository:
+
+```bash
+git clone https://github.com/Vlady057/job-board-scraper.git
+cd job-board-scraper
+```
+
+Create a virtual environment:
 
 ```bash
 python -m venv .venv
 ```
 
-Activate the virtual environment.
-
-Windows PowerShell:
+Activate it on Windows PowerShell:
 
 ```powershell
 .venv\Scripts\Activate.ps1
@@ -110,23 +111,25 @@ Windows PowerShell:
 
 Install dependencies:
 
-```bash
+```powershell
 pip install -r requirements.txt
 ```
 
-Install the Playwright browser:
+Install the Playwright Chromium browser:
 
-```bash
-python -m playwright install chromium
+```powershell
+playwright install chromium
 ```
 
 ## Usage
 
-Run the scraper:
+Run the scraper from the project root:
 
 ```powershell
-python src\scraper.py
+python -m src.scraper
 ```
+
+The scraper collects all available jobs and then filters jobs containing `python` in the job title.
 
 Example output:
 
@@ -137,21 +140,39 @@ Saved all jobs: 100
 Saved Python jobs: 10
 ```
 
+## Output
+
+All collected jobs are saved to:
+
+```text
+data/jobs.json
+```
+
+Filtered Python jobs are saved to:
+
+```text
+data/python_jobs.json
+```
+
+Example job:
+
+```json
+{
+    "title": "Python Developer",
+    "company": "Example Company",
+    "location": "Remote"
+}
+```
+
 ## Testing
 
-Run the test suite:
+Run all tests:
 
 ```powershell
 python -m pytest -v
 ```
 
-Current test coverage includes:
-
-* Job data parsing
-* Keyword filtering
-* JSON storage
-
-Example:
+Expected result:
 
 ```text
 tests/test_parser.py::test_parse_job PASSED
@@ -161,14 +182,34 @@ tests/test_storage.py::test_save_jobs PASSED
 3 passed
 ```
 
-## Purpose
+The tests cover:
 
-This project demonstrates practical experience with:
+* job data parsing
+* keyword filtering
+* JSON storage
 
-* Web scraping
-* Browser automation
-* HTML element selection
-* Data parsing and filtering
-* JSON data processing
-* Automated testing with pytest
-* Structuring a Python scraping project
+The parser tests use mock objects instead of launching a real browser, keeping the tests fast and independent of the target website.
+
+## Example Workflow
+
+```text
+1. Launch Playwright
+        ↓
+2. Open the job board
+        ↓
+3. Find job cards
+        ↓
+4. Parse title, company and location
+        ↓
+5. Store all jobs in a list
+        ↓
+6. Filter Python-related jobs
+        ↓
+7. Save results to JSON
+        ↓
+8. Run tests
+```
+
+## Repository
+
+[GitHub — Vlady057/job-board-scraper](https://github.com/Vlady057/job-board-scraper)
